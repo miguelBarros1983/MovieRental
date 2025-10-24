@@ -1,0 +1,19 @@
+﻿P1 - The rental class has a method to save, but it is not async, can you make it async and explain to us what is the difference?
+
+R: Essentially, the difference is whether the thread becomes blocked or not.
+   Synchronous (original implementation): the thread is blocked while waiting for the database
+   operation to complete. If we consider multiple simultaneous requests, having several blocked
+   threads may cause timeouts, delayed responses, or even exhaust the server's thread pool.
+   
+   Asynchronous (updated implementation): the thread is not blocked. Once the database operation
+   finishes, execution continues. When using Entity Framework in APIs, it's recommended to use
+   asynchronous methods whenever possible due to performance benefits.
+
+P2 - "In the MovieFeatures class, there is a method to list all movies, tell us your opinion about it.
+
+R: I believe that, in addition to using async, it would be recommended to apply some filtering
+   to avoid retrieving very large result sets. A good suggestion would be to implement a limit,
+   for example, pagination.
+   
+   More generally speaking about the application design, I would say that directly calling the
+   DbContext, exposing the entities, and having no exception handling are not ideal practices.
