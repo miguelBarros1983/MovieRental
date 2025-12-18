@@ -20,7 +20,7 @@ pipeline {
                     sh """
                         export PATH="\$PATH:$DOTNET_TOOLS"
                         dotnet-sonarscanner begin \
-                            /k:"demo-app" \
+                            /k:"movie-rental" \
                             /d:sonar.host.url="http://sonarqube:9000" \
                             /d:sonar.token="$SONAR_TOKEN" \
                             /d:sonar.exclusions="**/.vs/**,**/bin/**,**/obj/**"
